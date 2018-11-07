@@ -1,0 +1,18 @@
+{
+  "name": "webpack-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack config/webpack.config.js --mode=development --watch",
+    "build": "webpack config/webpack.config.js --mode=development",
+    "prod": "webpack config/webpack.config.js  --mode=production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
