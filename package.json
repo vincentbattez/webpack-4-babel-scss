@@ -4,14 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack config/webpack.config.js --mode=development --watch",
-    "build": "webpack config/webpack.config.js --mode=development",
-    "prod": "webpack config/webpack.config.js  --mode=production"
+    "start": "webpack --config ./webpack/webpack.config.js --display-error-details --mode=development --watch",
+    "build": "rm -rf ./dist && webpack --config ./webpack/webpack.config.js --display-error-details --mode=development",
+    "prod": "webpack --config ./webpack/webpack.config.js --display-error-details  --mode=production"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "autoprefixer": "^9.3.1",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^0.1.4",
+    "css-loader": "^1.0.1",
+    "cssnano": "^4.1.7",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "node-sass": "^4.10.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.4.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2"
   }
