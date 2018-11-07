@@ -1,4 +1,6 @@
-// import navbar from "./components/navbar"
-console.log('main.js');
+// import "../sass/main.scss"
+import navbar from "./components/navbar"
 
-// navbar();
+console.log('main.js');
+const toto = 'toto';
+navbar();
