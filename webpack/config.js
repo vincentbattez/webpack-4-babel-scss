@@ -4,28 +4,32 @@ const path = require('path');
     $ PATHS
 \*———————————————————————————————————*/
 let paths = {
-  // SOURCES
+  /*———————————————*\
+      $ SOURCES
+  \*———————————————*/
   srcPath: 'resources/assets/',
   src: {
     js: {
-      folderName: 'js',
-      fileName: 'main.js',
+      folderName: 'js',    // /resources/assets/js
+      fileName: 'main.js', // /resources/assets/js/main.js
     },
     css: {
-      folderName: 'sass',
-      fileName: 'main.scss',
+      folderName: 'sass',    // /resources/assets/sass
+      fileName: 'main.scss', // /resources/assets/sass/main.scss
     }
   },
-  // DIST
+  /*—————————————*\
+      $ DIST
+  \*—————————————*/
   distPath: 'dist/',
   dist: {
     js: {
-      folderName: 'js',
-      fileName: '[name].js',
+      folderName: 'js/foo/faa', // /dist/js/foo/faa
+      fileName: '[name].js',    // /dist/js/foo/faa/[name].js
     },
     css: {
-      folderName: 'css',
-      fileName: '[name].css',
+      folderName: 'css',      // /dist/css
+      fileName: '[name].css', // /dist/css/[name].css
     }
   }
 }
@@ -57,6 +61,19 @@ const modules = {
 /*———————————————————————————————————*\
     $ Don't touch (path manipulation)
 \*———————————————————————————————————*/
+if (paths.dist.js.folderName === '') {
+  paths.dist.css.folderName = paths.distPath + paths.dist.css.folderName 
+} else {
+  let moveBack = ''
+  jsFolderDepth = paths.dist.js.folderName.split("/").length -1;
+  
+  for(i = 0; i < jsFolderDepth; i++) {
+    moveBack = moveBack + '../'
+  }
+
+  paths.dist.css.folderName = moveBack + paths.dist.css.folderName 
+}
+
 paths.src.js.fullPath   = paths.srcPath + paths.src.js.folderName    + '/' + paths.src.js.fileName
 paths.src.css.fullPath  = paths.srcPath + paths.src.css.folderName   + '/' + paths.src.css.fileName
 paths.dist.js.fullPath  = paths.distPath + paths.dist.js.folderName  + '/' + paths.dist.js.fileName

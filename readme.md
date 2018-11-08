@@ -1,4 +1,6 @@
 # Getting started
+/!\ Ne fonctionne qu'avec **1 fichier js et css bundle**. Si vous voulez avoir **plusieurs fichiers js / css en sortie**, il faudra bidouiller la partie **entry** du fichier `webpack/webpack.config.js`
+
 
 ## Install & config
 ``` js
