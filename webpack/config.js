@@ -21,11 +21,11 @@ let paths = {
   dist: {
     js: {
       folderName: 'js',
-      fileName: 'bundle.js',
+      fileName: '[name].js',
     },
     css: {
       folderName: 'css',
-      fileName: 'bundle.css',
+      fileName: '[name].css',
     }
   }
 }
@@ -40,7 +40,7 @@ const modules = {
   },
   // Production
   prod: {
-    sourceMap: true,
+    sourceMap: false,
   }
 }
 

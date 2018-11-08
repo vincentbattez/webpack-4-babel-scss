@@ -1,4 +1,4 @@
-const config = require('./compile.config')
+const config = require('./config.js')
   const paths = config.paths
   const modules = config.modules
 
@@ -19,39 +19,63 @@ const webpackConfig = module.exports = {
   output: {
     path: paths.dist.js.absoluteFolderPath,
     filename: paths.dist.js.fileName
-  },
-  /*———————————————————————————————————*\
-      $ MODULES
-  \*———————————————————————————————————*/
-  module: {
-    rules: [
-      loaders.JSLoader,
-      loaders.CSSLoader
-    ]
-  },
-  /*———————————————————————————————————*\
-      $ PLUGINS
-  \*———————————————————————————————————*/
-  plugins: [
-    plugins.ExtractTextPlugin,
-  ],
+  }
 };
 
 
 module.exports = (env, argv) => {
   /*———————————————————————————————————*\
+      $ PLUGINS
+  \*———————————————————————————————————*/
+  webpackConfig.plugins = [
+    plugins.ExtractTextPlugin,
+  ]
+  /*———————————————————————————————————*\
+      $ MODULES
+  \*———————————————————————————————————*/
+  webpackConfig.module = {
+    rules: [
+      loaders.JSLoader,
+    ]
+  }
+
+
+
+
+  /*———————————————————————————————————*\
       $ DEVELOPMENT
   \*———————————————————————————————————*/
   if (argv.mode === 'development') {
-    webpackConfig.devtool = 'source-map';
+    if (modules.dev.sourceMap) {
+      webpackConfig.devtool = 'source-map';
+    }
+    /*———————————————————————————————————*\
+        $ MODULES
+    \*———————————————————————————————————*/
+    webpackConfig.module = {
+      rules: [
+        loaders.CSSLoaderDev
+      ]
+    }
   }
 
   /*———————————————————————————————————*\
       $ PRODUCTION
   \*———————————————————————————————————*/
   if (argv.mode === 'production') {
-    //...
+    if (modules.prod.sourceMap) {
+      webpackConfig.devtool = 'source-map';
+    }
+    /*———————————————————————————————————*\
+        $ MODULES
+    \*———————————————————————————————————*/
+    webpackConfig.module = {
+      rules: [
+        loaders.CSSLoaderProd
+      ]
+    }
   }
 
+  console.log(webpackConfig);
   return webpackConfig
 };

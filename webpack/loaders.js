@@ -1,4 +1,4 @@
-const config = require('./compile.config')
+const config = require('./config.js')
   const modules = config.modules
 
 const plugins = require('./plugins');
@@ -21,7 +21,7 @@ const JSLoader = {
 /*———————————————————————————————————*\
     $ SCSS
 \*———————————————————————————————————*/
-const CSSLoader = {
+const CSSLoaderDev = {
   test: /\.(css|scss)$/,
   use: plugins.ExtractTextPlugin.extract({
     fallback: 'style-loader',
@@ -39,7 +39,6 @@ const CSSLoader = {
           ident: 'postcss',
           plugins: (loader) => [
             require('autoprefixer')({ browsers: ['last 2 versions', '> 5%'] }),
-            require('cssnano')(     { preset: 'default' }),
           ],
         }
       },
@@ -47,6 +46,38 @@ const CSSLoader = {
         loader: 'sass-loader',
         options: {
           sourceMap: modules.dev.sourceMap,
+        }
+      }
+    ]
+  })
+};
+
+const CSSLoaderProd = {
+  test: /\.(css|scss)$/,
+  use: plugins.ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: [{
+        loader: 'css-loader',
+        options: {
+          importLoaders: 1,
+          sourceMap: modules.prod.sourceMap,
+        }
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: modules.prod.sourceMap,
+          ident: 'postcss',
+          plugins: (loader) => [
+            require('autoprefixer')({ browsers: ['last 2 versions', '> 5%'] }),
+            require('cssnano')(     { preset: 'default' }),
+          ],
+        }
+      },
+      {
+        loader: 'sass-loader',
+        options: {
+          sourceMap: modules.prod.sourceMap,
         }
       }
     ]
@@ -63,5 +94,6 @@ const CSSLoader = {
 \*———————————————————————————————————*/
 module.exports = {
   JSLoader: JSLoader,
-  CSSLoader: CSSLoader
+  CSSLoaderDev: CSSLoaderDev,
+  CSSLoaderProd: CSSLoaderProd
 };
