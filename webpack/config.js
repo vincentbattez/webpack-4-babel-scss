@@ -36,11 +36,20 @@ let paths = {
 const modules = {
   // Development
   dev: {
-    sourceMap: true,
+    sourceMap:    true,
+    minifyJs:     false,
+    minifyCss:    false,
+    autoprefixer: true
   },
   // Production
   prod: {
-    sourceMap: false,
+    sourceMap:    false,
+    minifyJs:     true,
+    minifyCss:    true,
+    autoprefixer: true
+  },
+  autoprefixBrowser: {
+    browsers: ['last 2 versions', '> 5%']
   }
 }
 

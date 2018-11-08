@@ -28,7 +28,7 @@ module.exports = (env, argv) => {
       $ PLUGINS
   \*———————————————————————————————————*/
   webpackConfig.plugins = [
-    plugins.ExtractTextPlugin,
+    plugins.ExtractTextPlugin
   ]
   /*———————————————————————————————————*\
       $ MODULES
@@ -49,6 +49,9 @@ module.exports = (env, argv) => {
     if (modules.dev.sourceMap) {
       webpackConfig.devtool = 'source-map';
     }
+    webpackConfig.optimization = {
+      minimize: modules.dev.minifyJs
+    }
     /*———————————————————————————————————*\
         $ MODULES
     \*———————————————————————————————————*/
@@ -66,6 +69,9 @@ module.exports = (env, argv) => {
     if (modules.prod.sourceMap) {
       webpackConfig.devtool = 'source-map';
     }
+    webpackConfig.optimization = {
+      minimize: modules.prod.minifyJs
+    }
     /*———————————————————————————————————*\
         $ MODULES
     \*———————————————————————————————————*/
@@ -76,6 +82,6 @@ module.exports = (env, argv) => {
     }
   }
 
-  console.log(webpackConfig);
+  // console.log(webpackConfig);
   return webpackConfig
 };

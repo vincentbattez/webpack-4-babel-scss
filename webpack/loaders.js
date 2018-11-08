@@ -21,6 +21,7 @@ const JSLoader = {
 /*———————————————————————————————————*\
     $ SCSS
 \*———————————————————————————————————*/
+// DEV
 const CSSLoaderDev = {
   test: /\.(css|scss)$/,
   use: plugins.ExtractTextPlugin.extract({
@@ -38,7 +39,13 @@ const CSSLoaderDev = {
           sourceMap: modules.dev.sourceMap,
           ident: 'postcss',
           plugins: (loader) => [
-            require('autoprefixer')({ browsers: ['last 2 versions', '> 5%'] }),
+            (modules.dev.minifyCss) 
+              ? require('cssnano')()
+              : require('postcss-import'), // postcss-import for fix empty else     
+
+            (modules.dev.autoprefixer)
+              ? require('autoprefixer')(modules.autoprefixBrowser)
+              : require('postcss-import'), // postcss-import for fix empty else            
           ],
         }
       },
@@ -52,6 +59,7 @@ const CSSLoaderDev = {
   })
 };
 
+// PROD
 const CSSLoaderProd = {
   test: /\.(css|scss)$/,
   use: plugins.ExtractTextPlugin.extract({
@@ -69,8 +77,13 @@ const CSSLoaderProd = {
           sourceMap: modules.prod.sourceMap,
           ident: 'postcss',
           plugins: (loader) => [
-            require('autoprefixer')({ browsers: ['last 2 versions', '> 5%'] }),
-            require('cssnano')(     { preset: 'default' }),
+            (modules.prod.minifyCss) 
+              ? require('cssnano')()
+              : require('postcss-import'), // postcss-import for fix empty else     
+
+            (modules.prod.autoprefixer)
+              ? require('autoprefixer')(modules.autoprefixBrowser)
+              : require('postcss-import'), // postcss-import for fix empty else            
           ],
         }
       },
