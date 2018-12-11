@@ -10,12 +10,12 @@ let paths = {
   srcPath: 'resources/assets/',
   src: {
     js: {
-      folderName: 'js',    // /resources/assets/js
-      fileName: 'main.js', // /resources/assets/js/main.js
+      folderName: 'js',    // resources/assets/js
+      fileName: 'main.js', // resources/assets/js/main.js
     },
     css: {
-      folderName: 'sass',    // /resources/assets/sass
-      fileName: 'main.scss', // /resources/assets/sass/main.scss
+      folderName: 'sass',    // resources/assets/sass
+      fileName: 'main.scss', // resources/assets/sass/main.scss
     }
   },
   /*—————————————*\
@@ -24,12 +24,12 @@ let paths = {
   distPath: 'dist/',
   dist: {
     js: {
-      folderName: 'js/foo/faa', // /dist/js/foo/faa
-      fileName: '[name].js',    // /dist/js/foo/faa/[name].js
+      folderName: 'js/foo/faa', // dist/js/foo/faa
+      fileName: '[name].js',    // dist/js/foo/faa/[name].js
     },
     css: {
-      folderName: 'css',      // /dist/css
-      fileName: '[name].css', // /dist/css/[name].css
+      folderName: 'css',      // dist/css
+      fileName: '[name].css', // dist/css/[name].css
     }
   }
 }
